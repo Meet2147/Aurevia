@@ -13,7 +13,7 @@ const Footer = () => {
                 <Sparkles className="w-5 h-5 text-white" />
               </div>
               <span className="text-2xl font-bold bg-gradient-to-r from-lavender-400 to-lilac-400 bg-clip-text text-transparent">
-                StyleAI
+                Aurevia
               </span>
             </div>
             <p className="text-gray-400 max-w-md leading-relaxed">
@@ -48,7 +48,7 @@ const Footer = () => {
         <div className="border-t border-gray-800 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <p className="text-gray-400 text-sm">
-              © 2025 StyleAI. All rights reserved. Made with ✨ for Gen Z.
+              © 2025 Aurevia. All rights reserved. Made with ✨ for Gen Z.
             </p>
             
             <div className="flex items-center space-x-6">

@@ -11,7 +11,7 @@ const Header = () => {
               <Sparkles className="w-5 h-5 text-white" />
             </div>
             <span className="text-xl font-bold bg-gradient-to-r from-lavender-600 to-lilac-600 bg-clip-text text-transparent">
-              StyleAI
+              Aurevia
             </span>
           </div>
           
