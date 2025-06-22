@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Sparkles, Menu, X } from 'lucide-react';
-import logo from '../assets/logo1.png';
+import logo from '../assets/logo.svg';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -18,7 +18,7 @@ const Header = () => {
             <img 
               src={logo}
               alt="Aurevia Logo" 
-              className="w-28 h-28 object-contain"
+              className="w-10 object-contain"
               onError={(e) => {
                 e.target.style.display = 'none';
                 e.target.nextSibling.style.display = 'block';
