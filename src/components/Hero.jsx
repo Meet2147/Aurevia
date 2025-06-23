@@ -3,7 +3,7 @@ import { ArrowRight, Sparkles } from 'lucide-react';
 
 const Hero = () => {
   return (
-    <section className="mt-16 min-h-screen flex items-center justify-center bg-gradient-to-br from-orange-50 via-amber-50 to-red-50 relative overflow-hidden pt-20 sm:pt-24 md:pt-0">
+    <section className="min-h-screen flex items-center justify-center bg-gradient-to-br from-orange-50 via-amber-50 to-red-50 relative overflow-hidden pt-20 sm:pt-24">
       {/* Enhanced Grid Background Aesthetic */}
       <div className="absolute inset-0 pointer-events-none z-0">
         {/* Primary grid lines */}
