@@ -1,5 +1,9 @@
 import React from 'react';
 import { ArrowRight, Sparkles } from 'lucide-react';
+import cloth from '../assets/cloth1.jpg';
+import datenight from '../assets/datenight.jpg';
+import work from '../assets/work.jpg';
+import casual from '../assets/casual.jpg';
 
 const Hero = () => {
   return (
@@ -94,32 +98,60 @@ const Hero = () => {
 
           {/* Right Visual */}
           <div className="relative mt-8 lg:mt-0">
-            <div className="grid grid-cols-2 gap-3 sm:gap-4 md:gap-6 max-w-xs sm:max-w-sm md:max-w-md mx-auto">
+            <div className="grid grid-cols-2 gap-3 sm:gap-4 md:gap-6 max-w-md sm:max-w-lg md:max-w-xl mx-auto">
               <div className="space-y-3 sm:space-y-4 md:space-y-6">
-                <div className="animate-float bg-white/80 backdrop-blur-sm p-3 sm:p-4 md:p-6 rounded-xl sm:rounded-2xl shadow-xl border border-orange-100/50">
-                  <div className="w-full h-20 sm:h-24 md:h-32 bg-gradient-to-br from-orange-200 to-red-200 rounded-lg sm:rounded-xl mb-2 sm:mb-3 md:mb-4"></div>
-                  <h3 className="font-semibold text-gray-800 text-sm sm:text-base">Casual Chic</h3>
-                  <p className="text-xs sm:text-sm text-gray-600">Perfect for brunch</p>
+                {/* Featured cloth image */}
+                <div className="animate-float bg-white/80 backdrop-blur-sm p-2 sm:p-3 md:p-4 rounded-xl sm:rounded-2xl shadow-xl border border-orange-100/50 col-span-2">
+                  <div className="w-full h-48 sm:h-56 md:h-64 lg:h-72 rounded-xl sm:rounded-2xl mb-2 sm:mb-3 md:mb-4 overflow-hidden bg-gray-50">
+                    <img 
+                      src={cloth} 
+                      alt="Featured clothing item" 
+                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-300 rounded-xl sm:rounded-2xl"
+                    />
+                  </div>
+                  <h3 className="font-semibold text-gray-800 text-base sm:text-lg">Featured Style</h3>
+                  <p className="text-sm sm:text-base text-gray-600">AI-curated just for you</p>
                 </div>
 
-                <div className="animate-float bg-white/80 backdrop-blur-sm p-3 sm:p-4 md:p-6 rounded-xl sm:rounded-2xl shadow-xl border border-amber-100/50" style={{ animationDelay: '1s' }}>
-                  <div className="w-full h-20 sm:h-24 md:h-32 bg-gradient-to-br from-amber-200 to-orange-200 rounded-lg sm:rounded-xl mb-2 sm:mb-3 md:mb-4"></div>
-                  <h3 className="font-semibold text-gray-800 text-sm sm:text-base">Work Ready</h3>
-                  <p className="text-xs sm:text-sm text-gray-600">Confident & professional</p>
+                {/* Work outfit - enlarged to match */}
+                <div className="animate-float bg-white/80 backdrop-blur-sm p-2 sm:p-3 md:p-4 rounded-xl sm:rounded-2xl shadow-xl border border-amber-100/50" style={{ animationDelay: '1s' }}>
+                  <div className="w-full h-40 sm:h-48 md:h-56 lg:h-64 rounded-xl sm:rounded-2xl mb-2 sm:mb-3 md:mb-4 overflow-hidden bg-gray-50">
+                    <img 
+                      src={work}
+                      alt="Work ready outfit" 
+                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-300 rounded-xl sm:rounded-2xl"
+                    />
+                  </div>
+                  <h3 className="font-semibold text-gray-800 text-base sm:text-lg">Work Ready</h3>
+                  <p className="text-sm sm:text-base text-gray-600">Confident & professional</p>
                 </div>
               </div>
 
               <div className="space-y-3 sm:space-y-4 md:space-y-6 mt-6 sm:mt-8 md:mt-12">
-                <div className="animate-float bg-white/80 backdrop-blur-sm p-3 sm:p-4 md:p-6 rounded-xl sm:rounded-2xl shadow-xl border border-red-100/50" style={{ animationDelay: '2s' }}>
-                  <div className="w-full h-20 sm:h-24 md:h-32 bg-gradient-to-br from-red-200 to-pink-200 rounded-lg sm:rounded-xl mb-2 sm:mb-3 md:mb-4"></div>
-                  <h3 className="font-semibold text-gray-800 text-sm sm:text-base">Date Night</h3>
-                  <p className="text-xs sm:text-sm text-gray-600">Stunning & stylish</p>
+                {/* Weekend Vibe - enlarged to match featured style */}
+                <div className="animate-float bg-white/80 backdrop-blur-sm p-2 sm:p-3 md:p-4 rounded-xl sm:rounded-2xl shadow-xl border border-pink-100/50 col-span-2" style={{ animationDelay: '2s' }}>
+                  <div className="w-full h-48 sm:h-56 md:h-64 lg:h-72 rounded-xl sm:rounded-2xl mb-2 sm:mb-3 md:mb-4 overflow-hidden bg-gray-50">
+                    <img 
+                      src={casual} 
+                      alt="Weekend casual outfit" 
+                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-300 rounded-xl sm:rounded-2xl"
+                    />
+                  </div>
+                  <h3 className="font-semibold text-gray-800 text-base sm:text-lg">Weekend Vibe</h3>
+                  <p className="text-sm sm:text-base text-gray-600">Comfy meets cute</p>
                 </div>
 
-                <div className="animate-float bg-white/80 backdrop-blur-sm p-3 sm:p-4 md:p-6 rounded-xl sm:rounded-2xl shadow-xl border border-pink-100/50" style={{ animationDelay: '3s' }}>
-                  <div className="w-full h-20 sm:h-24 md:h-32 bg-gradient-to-br from-pink-200 to-orange-200 rounded-lg sm:rounded-xl mb-2 sm:mb-3 md:mb-4"></div>
-                  <h3 className="font-semibold text-gray-800 text-sm sm:text-base">Weekend Vibe</h3>
-                  <p className="text-xs sm:text-sm text-gray-600">Comfy meets cute</p>
+                {/* Date night image */}
+                <div className="animate-float bg-white/80 backdrop-blur-sm p-2 sm:p-3 md:p-4 rounded-xl sm:rounded-2xl shadow-xl border border-red-100/50" style={{ animationDelay: '3s' }}>
+                  <div className="w-full h-40 sm:h-48 md:h-56 lg:h-64 rounded-xl sm:rounded-2xl mb-2 sm:mb-3 md:mb-4 overflow-hidden bg-gray-50">
+                    <img 
+                      src={datenight} 
+                      alt="Date night outfit" 
+                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-300 rounded-xl sm:rounded-2xl"
+                    />
+                  </div>
+                  <h3 className="font-semibold text-gray-800 text-base sm:text-lg">Date Night</h3>
+                  <p className="text-sm sm:text-base text-gray-600">Stunning & stylish</p>
                 </div>
               </div>
             </div>
