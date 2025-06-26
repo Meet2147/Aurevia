@@ -1,5 +1,5 @@
 import React from 'react';
-import { Shirt, Wand2, Heart, Minimize2 } from 'lucide-react';
+import { Shirt, Wand2, Palette, Minimize2 } from 'lucide-react';
 
 const Features = () => {
   const features = [
@@ -18,11 +18,11 @@ const Features = () => {
       bgColor: "from-amber-100 to-orange-100"
     },
     {
-      icon: Heart,
-      title: "Mood-based Styling",
-      description: "Tell us how you're feeling and we'll curate outfits that match your vibe perfectly.",
-      color: "from-pink-500 to-red-400",
-      bgColor: "from-pink-100 to-red-100"
+      icon: Palette,
+      title: "Style Canvas & AI Scoring",
+      description: "Create outfits on our interactive canvas and get instant AI-powered style scores and feedback.",
+      color: "from-purple-500 to-pink-500",
+      bgColor: "from-purple-100 to-pink-100"
     },
     {
       icon: Minimize2,
