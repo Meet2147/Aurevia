@@ -75,10 +75,10 @@ const Footer = () => {
 
                     {/* Legal */}
                     <div className="sm:col-span-1">
-                        <h4 className="font-semibold text-base sm:text-lg mb-3 sm:mb-4">
+                        {/* <h4 className="font-semibold text-base sm:text-lg mb-3 sm:mb-4">
                             Legal
-                        </h4>
-                        <ul className="space-y-1.5 sm:space-y-2">
+                        </h4> */}
+                        {/* <ul className="space-y-1.5 sm:space-y-2">
                             <li>
                                 <a
                                     href="#"
@@ -111,7 +111,7 @@ const Footer = () => {
                                     Get Early Access
                                 </a>
                             </li>
-                        </ul>
+                        </ul> */}
                     </div>
                 </div>
 

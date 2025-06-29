@@ -1,32 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { ArrowRight, CheckCircle, Sparkles } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const EmailSignup = () => {
   const [email, setEmail] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-
-  const launchDate = new Date("2025-07-01T00:00:00").getTime();
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      const now = new Date().getTime();
-      const distance = launchDate - now;
-
-      if (distance <= 0) {
-        clearInterval(interval);
-        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-      } else {
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-        setTimeLeft({ days, hours, minutes, seconds });
-      }
-    }, 1000);
-    return () => clearInterval(interval);
-  }, [launchDate]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -40,7 +18,7 @@ const EmailSignup = () => {
   };
 
   return (
-    <section className="relative py-20 sm:py-24 md:py-28 lg:py-32 bg-gradient-to-br from-orange-500 via-red-500 to-amber-500 text-white overflow-hidden">
+    <section id="email-signup" className="relative py-20 sm:py-24 md:py-28 lg:py-32 bg-gradient-to-br from-orange-500 via-red-500 to-amber-500 text-white overflow-hidden">
       {/* Floating blobs */}
       <div className="absolute top-[-50px] left-[-50px] w-72 h-72 bg-white opacity-10 rounded-full blur-3xl animate-pulse"></div>
       <div className="absolute bottom-[-60px] right-[-40px] w-80 h-80 bg-white opacity-10 rounded-full blur-3xl animate-ping"></div>
@@ -59,49 +37,17 @@ const EmailSignup = () => {
 
           {/* Main Heading */}
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 leading-tight">
-            Be the First to Try It! 🚀
+            The App is Coming Soon 🚀
           </h2>
-          <p className="text-base sm:text-lg md:text-xl text-white/90 mb-6 max-w-2xl mx-auto leading-relaxed">
-            Join the waitlist and unlock 3 months of AI-powered outfit suggestions — personalized just for you.
+          <p className="text-base sm:text-lg md:text-xl text-white/90 mb-8 max-w-2xl mx-auto leading-relaxed">
+            Join the waitlist to be among the first to experience AI-powered outfit suggestions, personalized just for you.
           </p>
-        </motion.div>
-
-        {/* Countdown Timer */}
-        <motion.div
-          className="flex justify-center gap-3 sm:gap-5 font-bold text-lg sm:text-xl mb-8"
-          initial="hidden"
-          animate="visible"
-          variants={{
-            visible: {
-              transition: {
-                staggerChildren: 0.1
-              }
-            }
-          }}
-        >
-          {['Days', 'Hours', 'Minutes', 'Seconds'].map((label, index) => {
-            const value = Object.values(timeLeft)[index];
-            return (
-              <motion.div
-                key={label}
-                variants={{
-                  hidden: { opacity: 0, scale: 0.8 },
-                  visible: { opacity: 1, scale: 1 }
-                }}
-                transition={{ duration: 0.4 }}
-                className="bg-white/20 backdrop-blur-sm px-4 py-2 sm:px-5 sm:py-3 rounded-xl shadow-inner min-w-[70px]"
-              >
-                <div>{value.toString().padStart(2, '0')}</div>
-                <div className="text-xs sm:text-sm text-white/80">{label}</div>
-              </motion.div>
-            );
-          })}
         </motion.div>
 
         {/* Email Form or Confirmation */}
         {!isSubmitted ? (
           <motion.div
-            className="max-w-md mx-auto"
+            className="max-w-md mx-auto mb-10"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.6 }}
@@ -126,7 +72,7 @@ const EmailSignup = () => {
           </motion.div>
         ) : (
           <motion.div
-            className="max-w-md mx-auto"
+            className="max-w-md mx-auto mb-10"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ type: 'spring', stiffness: 400, damping: 20 }}
@@ -142,7 +88,7 @@ const EmailSignup = () => {
 
         {/* Feature Teasers */}
         <motion.div
-          className="mt-10 grid sm:grid-cols-3 gap-6 max-w-3xl mx-auto text-sm sm:text-base text-white/90"
+          className="grid sm:grid-cols-3 gap-6 max-w-3xl mx-auto text-sm sm:text-base text-white/90"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}

@@ -1,225 +1,282 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { CheckCircle, Zap, Users, Shield } from 'lucide-react';
+import React, { useState, useEffect, useCallback } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import feat1 from '../assets/feat1.png';
 import feat2 from '../assets/feat2.png';
 import feat3 from '../assets/feat3.png';
 import feat4 from '../assets/feat4.png';
 import feat5 from '../assets/feat5.png';
 
+const features = [
+  {
+    id: 'smart-daily',
+    title: 'Smart Daily Recommendations',
+    desc: 'Get personalized outfit suggestions powered by AI, complete with style analytics and exclusive deal alerts on your favorite brands',
+    image: feat1,
+    color: 'from-orange-500 to-red-500',
+  },
+  {
+    id: 'social-style',
+    title: 'Social Style Discovery',
+    desc: 'Connect with fashion-forward friends, explore their curated outfits, and get inspired by their unique style boards',
+    image: feat2,
+    color: 'from-red-500 to-pink-500',
+  },
+  {
+    id: 'effortless-org',
+    title: 'Effortless Organization',
+    desc: 'Plan your weekly looks with our smart calendar and never overpack again with our intelligent trip planner',
+    image: feat3,
+    color: 'from-amber-500 to-orange-600',
+  },
+  {
+    id: 'infinite-style',
+    title: 'Infinite Style Combinations',
+    desc: 'Mix, match, and create endless outfit possibilities with our advanced styling engine and custom lookbook collections',
+    image: feat4,
+    color: 'from-orange-600 to-red-600',
+  },
+  {
+    id: 'daily-adventures',
+    title: 'Daily Style Adventures',
+    desc: 'Discover fresh combinations from your existing wardrobe with our daily shuffle feature and style challenges',
+    image: feat5,
+    color: 'from-red-600 to-orange-500',
+  },
+];
+
 const WhyItWorks = () => {
-  const benefits = [
-    { icon: CheckCircle, text: "No more 'What should I wear?' stress 😌" },
-    { icon: Zap, text: 'Get ready 3x faster every morning ⚡' },
-    { icon: Users, text: 'Discover new style combinations you never thought of 💡' },
-    { icon: Shield, text: 'Your photos stay private and secure 🔒' },
-  ];
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [direction, setDirection] = useState(0);
 
-  const features = [
-    {
-      title: 'Get Daily Outfit Recommendations',
-      desc: 'Along with stats to your outfitting pattern + watchlist deal alerts',
-      image: feat1,
-    },
-    {
-      title: 'Be inspired by friends',
-      desc: 'Follow your friends to see their outfits, moodboards and more',
-      image: feat2,
-    },
-    {
-      title: 'Get organised',
-      desc: 'Use the planner to schedule outfits and pack smartly for trips',
-      image: feat3,
-    },
-    {
-      title: 'Create unlimited outfits',
-      desc: 'Design endless outfits and organize them with lookbooks',
-      image: feat4,
-    },
-    {
-      title: 'Start styling',
-      desc: 'Shuffle your wardrobe and discover new combinations daily',
-      image: feat5,
-    },
-  ];
-
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
-  const carouselRef = useRef(null);
-
-  const scrollToSlide = (index) => {
-    if (!carouselRef.current) return;
-    const total = features.length;
-    const clampedIndex = (index + total) % total;
-    const width = carouselRef.current.offsetWidth;
-    carouselRef.current.scrollTo({
-      left: clampedIndex * width,
-      behavior: 'smooth',
-    });
-    setActiveIndex(clampedIndex);
-  };
+  const currentFeature = features[currentIndex];
 
   useEffect(() => {
-    if (isPaused) return;
+    if (!isAutoPlaying) return;
     const interval = setInterval(() => {
-      scrollToSlide(activeIndex + 1);
-    }, 5000);
+      setDirection(1);
+      setCurrentIndex((prev) => (prev + 1) % features.length);
+    }, 4000);
     return () => clearInterval(interval);
-  }, [activeIndex, isPaused]);
+  }, [isAutoPlaying]);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => setIsAutoPlaying(true), 10000);
+    return () => clearTimeout(timeout);
+  }, [currentIndex]);
+
+  const goToNext = useCallback(() => {
+    setDirection(1);
+    setCurrentIndex((prev) => (prev + 1) % features.length);
+    setIsAutoPlaying(false);
+  }, []);
+
+  const goToPrev = useCallback(() => {
+    setDirection(-1);
+    setCurrentIndex((prev) => (prev - 1 + features.length) % features.length);
+    setIsAutoPlaying(false);
+  }, []);
+
+  const goToSlide = useCallback(
+    (index) => {
+      setDirection(index > currentIndex ? 1 : -1);
+      setCurrentIndex(index);
+      setIsAutoPlaying(false);
+    },
+    [currentIndex]
+  );
+
+  const slideVariants = {
+    enter: (direction) => ({
+      x: direction > 0 ? 300 : -300,
+      opacity: 0,
+      scale: 0.8,
+    }),
+    center: {
+      zIndex: 1,
+      x: 0,
+      opacity: 1,
+      scale: 1,
+    },
+    exit: (direction) => ({
+      zIndex: 0,
+      x: direction < 0 ? 300 : -300,
+      opacity: 0,
+      scale: 0.8,
+    }),
+  };
+
+  const textVariants = {
+    enter: {
+      y: 30,
+      opacity: 0,
+    },
+    center: {
+      y: 0,
+      opacity: 1,
+    },
+    exit: {
+      y: -30,
+      opacity: 0,
+    },
+  };
 
   return (
-    <section className="py-20 bg-gradient-to-br from-orange-50 via-amber-50 to-red-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="why" className="py-24 relative overflow-hidden bg-gradient-to-br from-orange-50 via-amber-50 to-red-50">
+      {/* Background Layers */}
+      <div className="absolute inset-0 pointer-events-none z-0">
+        <div
+          className="w-full h-full opacity-25"
+          style={{
+            backgroundImage: `
+              linear-gradient(rgba(251, 146, 60, 0.4) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(251, 146, 60, 0.4) 1px, transparent 1px)
+            `,
+            backgroundSize: '40px 40px',
+          }}
+        />
+        <div
+          className="w-full h-full opacity-15"
+          style={{
+            backgroundImage: `
+              linear-gradient(rgba(239, 68, 68, 0.3) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(239, 68, 68, 0.3) 1px, transparent 1px)
+            `,
+            backgroundSize: '20px 20px',
+          }}
+        />
+        <div className="w-full h-full bg-[radial-gradient(circle,_rgba(251,146,60,0.15)_1px,_transparent_1px)] [background-size:10px_10px] opacity-35"></div>
+      </div>
 
-        {/* Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold leading-tight mb-4">
-            <span className="bg-gradient-to-r from-gray-900 to-orange-700 bg-clip-text text-transparent block">
-              Why it actually works
+      {/* Gradient Blobs */}
+      <div className="absolute inset-0 overflow-hidden z-0">
+        <div className="absolute -top-20 sm:-top-40 -right-20 sm:-right-40 w-40 h-40 sm:w-80 sm:h-80 bg-gradient-to-br from-orange-200/30 to-red-200/30 rounded-full blur-3xl"></div>
+        <div className="absolute -bottom-20 sm:-bottom-40 -left-20 sm:-left-40 w-40 h-40 sm:w-80 sm:h-80 bg-gradient-to-br from-amber-200/30 to-orange-200/30 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-48 h-48 sm:w-96 sm:h-96 bg-gradient-to-br from-red-100/20 to-orange-100/20 rounded-full blur-3xl"></div>
+      </div>
+
+      {/* Content */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <motion.div className="text-center mb-16" initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
+          <motion.h2
+            className="text-5xl md:text-6xl font-black text-gray-900 mb-6 leading-tight"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, ease: 'easeOut' }}
+          >
+            Experience the
+            <span className="block bg-gradient-to-r from-orange-300 via-red-300 to-amber-300 text-transparent bg-clip-text animate-pulse">
+              Future of Fashion
             </span>
-            <span className="bg-gradient-to-r from-orange-600 to-red-500 bg-clip-text text-transparent block">
-              (and why you'll love it)
-            </span>
-          </h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            We've studied thousands of wardrobes and style preferences to create an AI that truly gets your personal style. No generic suggestions, just outfits that feel authentically you.
-          </p>
-        </div>
+          </motion.h2>
+          <motion.p
+            className="text-xl text-gray-600 max-w-2xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+          >
+            Discover how StyleSense transforms your wardrobe into endless possibilities
+          </motion.p>
+        </motion.div>
 
-        {/* Benefits */}
-        <div className="max-w-4xl mx-auto mb-16">
-          <div className="grid sm:grid-cols-2 gap-6">
-            {benefits.map((benefit, index) => (
-              <div key={index} className="flex items-start space-x-4 hover:scale-105 transition-transform">
-                <div className="w-12 h-12 bg-gradient-to-br from-orange-400 to-red-400 rounded-full flex items-center justify-center shadow-lg">
-                  <benefit.icon className="w-6 h-6 text-white" />
-                </div>
-                <p className="text-lg text-gray-700 leading-relaxed">{benefit.text}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Desktop View */}
-        <div className="hidden lg:flex gap-8 items-start justify-center max-w-7xl mx-auto">
-          <div className="w-1/2 space-y-4 mt-10">
-            {features.map((feature, index) => (
-              <div
-                key={index}
-                onClick={() => setActiveIndex(index)}
-                className={`p-4 rounded-xl border cursor-pointer transition-all duration-200 ${
-                  activeIndex === index
-                    ? 'bg-gradient-to-r from-orange-100 to-amber-100 border-orange-400 shadow-md'
-                    : 'border-transparent hover:border-orange-300'
-                }`}
-              >
-                <h3 className="font-semibold text-lg text-orange-900">{index + 1}. {feature.title}</h3>
-                <p className="text-gray-600 text-sm mt-1">{feature.desc}</p>
-              </div>
-            ))}
-          </div>
-
-          <div className="w-1/2 flex justify-center items-center relative h-[600px]">
-            <div className="relative w-full h-full flex justify-center items-center">
-              {features.map((feature, index) => {
-                let position = index - activeIndex;
-                if (position > 2) position -= features.length;
-                if (position < -2) position += features.length;
-                if (Math.abs(position) > 1) return null;
-
-                const isActive = position === 0;
-                const isLeft = position === -1;
-                const isRight = position === 1;
-
-                return (
-                  <div
-                    key={index}
-                    className={`absolute transition-all duration-500 ease-in-out cursor-pointer ${
-                      isActive 
-                        ? 'z-30 scale-110' 
-                        : isLeft 
-                        ? 'z-20 scale-90 -translate-x-32 opacity-60' 
-                        : 'z-20 scale-90 translate-x-32 opacity-60'
-                    }`}
-                    onClick={() => setActiveIndex(index)}
-                  >
-                    <img 
-                      src={feature.image} 
-                      alt={feature.title} 
-                      className="object-contain w-72 h-[500px]" 
-                    />
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-
-        {/* Mobile View */}
-        <div className="lg:hidden flex flex-col gap-6 items-center">
-          <div className="relative w-full">
-            <div
-              className="overflow-x-auto flex snap-x snap-mandatory scrollbar-hide"
-              ref={carouselRef}
-              onScroll={(e) => {
-                const index = Math.round(e.target.scrollLeft / e.target.offsetWidth);
-                setActiveIndex(index);
-              }}
-            >
-              {features.map((feature, index) => (
-                <div
-                  key={index}
-                  className="snap-center w-full px-4 shrink-0 flex justify-center"
-                  onTouchStart={() => setIsPaused(true)}
-                  onTouchEnd={() => setIsPaused(false)}
-                  onTouchCancel={() => setIsPaused(false)}
-                >
-                  <img
-                    src={feature.image}
-                    alt={feature.title}
-                    className="object-contain w-full max-w-md h-[400px] rounded-xl transition-transform duration-300"
+        {/* Carousel */}
+        <div className="relative">
+          <div className="flex justify-center items-center min-h-[600px]">
+            <div className="flex flex-col lg:flex-row items-center gap-12 max-w-4xl mx-auto">
+              {/* Image */}
+              <div className="relative w-[320px] h-[400px] shrink-0 flex items-center justify-center">
+                <AnimatePresence initial={false} custom={direction} mode="wait">
+                  <motion.img
+                    key={currentFeature.id}
+                    src={currentFeature.image}
+                    alt={currentFeature.title}
+                    className="w-full h-auto object-contain relative z-10"
+                    custom={direction}
+                    variants={slideVariants}
+                    initial="enter"
+                    animate="center"
+                    exit="exit"
+                    transition={{
+                      x: { type: 'spring', stiffness: 300, damping: 30 },
+                      opacity: { duration: 0.3 },
+                      scale: { duration: 0.4 },
+                    }}
                   />
-                </div>
-              ))}
-            </div>
+                </AnimatePresence>
+              </div>
 
-            {/* Navigation Buttons */}
-            <div className="absolute top-1/2 -translate-y-1/2 w-full flex justify-between px-4">
-              <button
-                onClick={() => scrollToSlide(activeIndex - 1)}
-                className="bg-white/80 backdrop-blur-sm p-2 rounded-full shadow-md"
-              >
-                ◀
-              </button>
-              <button
-                onClick={() => scrollToSlide(activeIndex + 1)}
-                className="bg-white/80 backdrop-blur-sm p-2 rounded-full shadow-md"
-              >
-                ▶
-              </button>
+              {/* Text */}
+              <div className="flex-1 text-center lg:text-left max-w-lg">
+                <AnimatePresence initial={false} mode="wait">
+                  <motion.div
+                    key={`text-${currentFeature.id}`}
+                    variants={textVariants}
+                    initial="enter"
+                    animate="center"
+                    exit="exit"
+                    transition={{ duration: 0.4, ease: 'easeInOut' }}
+                  >
+                    <div
+                      className={`inline-block px-4 py-2 rounded-full text-white text-sm font-semibold mb-6 bg-gradient-to-r ${currentFeature.color}`}
+                    >
+                      Feature {currentIndex + 1} of {features.length}
+                    </div>
+
+                    <h3 className="text-4xl font-bold text-gray-900 mb-6 leading-tight">{currentFeature.title}</h3>
+                    <p className="text-gray-700 text-lg leading-relaxed mb-8">{currentFeature.desc}</p>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
             </div>
           </div>
 
-          {/* Description + Dot Indicators */}
-          <div className="w-full px-4">
-            <div className="p-4 rounded-xl bg-white">
-              <h3 className="font-semibold text-lg text-orange-900">{features[activeIndex].title}</h3>
-              <p className="text-gray-600 text-sm mt-1">{features[activeIndex].desc}</p>
-            </div>
+          {/* Arrows */}
+          <button
+            onClick={goToPrev}
+            className="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center text-gray-800 hover:bg-white/20 transition-all duration-300 hover:scale-110"
+            aria-label="Previous slide"
+          >
+            <ChevronLeft size={24} />
+          </button>
+          <button
+            onClick={goToNext}
+            className="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center text-gray-800 hover:bg-white/20 transition-all duration-300 hover:scale-110"
+            aria-label="Next slide"
+          >
+            <ChevronRight size={24} />
+          </button>
+        </div>
 
-            {/* Dot Indicators with Animation */}
-            <div className="flex justify-center mt-4 space-x-2">
-              {features.map((_, index) => (
-                <div
-                  key={index}
-                  className={`transition-all duration-500 rounded-full ${
-                    index === activeIndex
-                      ? 'w-4 h-4 bg-orange-500 shadow-md scale-110'
-                      : 'w-2.5 h-2.5 bg-gray-300 opacity-70'
-                  }`}
-                />
-              ))}
-            </div>
+        {/* Dots */}
+        <div className="flex justify-center mt-12 space-x-3">
+          {features.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => goToSlide(index)}
+              className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                index === currentIndex
+                  ? `bg-gradient-to-r ${currentFeature.color} scale-125`
+                  : 'bg-white/30 hover:bg-white/50'
+              }`}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))}
+        </div>
+
+        {/* Progress Bar */}
+        <div className="mt-8 max-w-md mx-auto">
+          <div className="w-full bg-white/20 rounded-full h-1">
+            <motion.div
+              className={`h-1 rounded-full bg-gradient-to-r ${currentFeature.color}`}
+              initial={{ width: 0 }}
+              animate={{ width: `${((currentIndex + 1) / features.length) * 100}%` }}
+              transition={{ duration: 0.6 }}
+            />
           </div>
+          <p className="text-center text-gray-400 text-sm mt-2">
+            {currentIndex + 1} of {features.length} features
+          </p>
         </div>
       </div>
     </section>
