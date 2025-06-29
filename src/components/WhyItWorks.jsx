@@ -252,7 +252,7 @@ const WhyItWorks = () => {
             <div className="flex justify-center items-center min-h-[700px]">
               <div className="flex items-center gap-12 max-w-6xl mx-auto">
                 {/* Image Container - Desktop */}
-                <div className="relative w-[500px] h-[500px] flex items-center justify-center shrink-0">
+                <div className="relative w-[500px] h-[700px] flex items-center justify-center shrink-0">
                   <AnimatePresence initial={false} custom={direction} mode="wait">
                     <motion.div
                       key={`desktop-${currentFeature.id}`}
