@@ -184,7 +184,7 @@ const WhyItWorks = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
           >
-            Discover how StyleSense transforms your wardrobe into endless possibilities
+            Discover how Aurevia transforms your wardrobe into endless possibilities
           </motion.p>
         </motion.div>
 
