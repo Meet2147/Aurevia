@@ -48,7 +48,7 @@ const Footer = () => {
                             </li>
                             <li>
                                 <a
-                                    href="#showcase"
+                                    href="#why"
                                     className="text-gray-400 hover:text-orange-400 transition-colors duration-200 text-sm sm:text-base"
                                 >
                                     Showcase
@@ -56,10 +56,10 @@ const Footer = () => {
                             </li>
                             <li>
                                 <a
-                                    href="#testimonials"
+                                    href="#email-signup"
                                     className="text-gray-400 hover:text-orange-400 transition-colors duration-200 text-sm sm:text-base"
                                 >
-                                    Reviews
+                                    Sign Up
                                 </a>
                             </li>
                             <li>
@@ -67,7 +67,7 @@ const Footer = () => {
                                     href="#"
                                     className="text-gray-400 hover:text-orange-400 transition-colors duration-200 text-sm sm:text-base"
                                 >
-                                    About
+                                    Home
                                 </a>
                             </li>
                         </ul>
