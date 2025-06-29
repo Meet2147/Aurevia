@@ -46,13 +46,13 @@ const Features = () => {
   return (
     <section
       id="features"
-      className="h-screen w-screen bg-gradient-to-br from-white via-orange-50 to-red-50 flex items-center justify-center"
+      className="py-16 sm:py-20 md:py-24 lg:py-28 bg-gradient-to-br from-white via-orange-50 to-red-50"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-12 lg:mb-16">
+        <div className="text-center mb-16">
           <motion.h2
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black leading-tight"
+            className="text-3xl sm:text-4xl md:text-5xl font-black leading-tight"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -66,7 +66,7 @@ const Features = () => {
             </span>
           </motion.h2>
           <motion.p
-            className="mt-4 text-lg sm:text-xl lg:text-2xl text-gray-600 max-w-3xl mx-auto"
+            className="mt-4 text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -77,7 +77,7 @@ const Features = () => {
         </div>
 
         {/* Features Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8 max-h-96">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
           {features.map((feature, i) => (
             <motion.div
               key={i}
@@ -86,7 +86,7 @@ const Features = () => {
               whileInView="show"
               viewport={{ once: true }}
               variants={fadeUp}
-              className="group relative rounded-2xl p-4 sm:p-5 md:p-6 lg:p-7 bg-white shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 cursor-pointer overflow-hidden"
+              className="group relative rounded-2xl p-6 sm:p-7 md:p-8 bg-white shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 cursor-pointer overflow-hidden"
             >
               {/* Background Gradient */}
               <div
@@ -99,11 +99,11 @@ const Features = () => {
               {/* Content */}
               <div className="relative z-10">
                 <div
-                  className={`inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 rounded-xl bg-gradient-to-br ${feature.color} mb-4 shadow-md`}
+                  className={`inline-flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-gradient-to-br ${feature.color} mb-5 shadow-md`}
                 >
-                  <feature.icon className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 text-white" />
+                  <feature.icon className="w-7 h-7 sm:w-8 sm:h-8 text-white" />
                 </div>
-                <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 sm:mb-3 group-hover:text-gray-800 transition-colors duration-200 leading-snug">
+                <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-gray-800 transition-colors duration-200 leading-snug">
                   {feature.title}
                 </h3>
                 <p className="text-gray-600 text-sm sm:text-base leading-relaxed group-hover:text-gray-700 transition-colors duration-200">
