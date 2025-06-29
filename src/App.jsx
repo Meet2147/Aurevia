@@ -3,7 +3,7 @@ import Header from './components/Header';
 import Hero from './components/Hero';
 import Features from './components/Features';
 import WhyItWorks from './components/WhyItWorks';
-import Showcase from './components/Showcase';
+// import Showcase from './components/Showcase';
 import CountdownTimer from './components/CountdownTimer';
 import EmailSignup from './components/EmailSignup';
 import Footer from './components/Footer';
@@ -15,7 +15,7 @@ function App() {
       <Hero />
       <Features />
       <WhyItWorks />
-      <Showcase />
+      {/* <Showcase /> */}
       {/* <CountdownTimer /> */}
       <EmailSignup />
       <Footer />

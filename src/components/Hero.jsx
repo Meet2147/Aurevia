@@ -48,7 +48,7 @@ const Hero = () => {
         <div className="grid lg:grid-cols-2 gap-20 sm:gap-20 items-center">
 
           {/* Left Content */}
-          <div className="space-y-6 sm:space-y-8 text-center lg:text-left lg:mr-12 xl:mr-20">
+          <div className="space-y-6 sm:space-y-4 text-center lg:text-left lg:mr-12 xl:mr-20">
 
             <div className="space-y-4 sm:space-y-6">
               <div className="inline-flex items-center space-x-2 bg-white/80 backdrop-blur-sm px-3 sm:px-4 py-2 rounded-full border border-orange-200/50 shadow-sm">
