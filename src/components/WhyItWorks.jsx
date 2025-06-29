@@ -123,10 +123,7 @@ const WhyItWorks = () => {
   };
 
   return (
-    <section
-      id="why"
-      className="min-h-screen pt-20 flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-orange-50 via-amber-50 to-red-50"
-    >
+    <section id="why" className="py-24 relative overflow-hidden bg-gradient-to-br from-orange-50 via-amber-50 to-red-50">
       {/* Background Layers */}
       <div className="absolute inset-0 pointer-events-none z-0">
         <div
@@ -161,12 +158,7 @@ const WhyItWorks = () => {
 
       {/* Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-        >
+        <motion.div className="text-center mb-16" initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
           <motion.h2
             className="text-5xl md:text-6xl font-black text-gray-900 mb-6 leading-tight"
             initial={{ opacity: 0, scale: 0.8 }}
