@@ -54,14 +54,14 @@ const Footer = () => {
                                     Showcase
                                 </a>
                             </li>
-                            <li>
+                            {/* <li>
                                 <a
                                     href="#email-signup"
                                     className="text-gray-400 hover:text-orange-400 transition-colors duration-200 text-sm sm:text-base"
                                 >
                                     Sign Up
                                 </a>
-                            </li>
+                            </li> */}
                             <li>
                                 <a
                                     href="#"
