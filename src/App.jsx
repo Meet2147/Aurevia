@@ -6,7 +6,7 @@ import Features from './components/Features';
 import WhyItWorks from './components/WhyItWorks';
 import EmailSignup from './components/EmailSignup';
 import Footer from './components/Footer';
-import ComingSoon from "../pages/ComingSoon";
+import ComingSoon from "./pages/ComingSoon";
 
 const MainApp = () => {
   return (
